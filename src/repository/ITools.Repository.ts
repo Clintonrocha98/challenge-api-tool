@@ -5,5 +5,6 @@ export interface IToolsRepository {
   insert(toolsDTO: toolsDTO): Promise<Tools>;
   tools(): Promise<Tools[] | []>;
   toolsByTag(tag: string): Promise<Tools[] | []>;
-  deleteTool(id: string): void;
+  deleteTool(id: number): Promise<void>;
+  toolExist(id: number): Promise<boolean>;
 }

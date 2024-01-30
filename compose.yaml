@@ -1,0 +1,21 @@
+version: '3'
+services:
+  container-api:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - container-postgres
+  container-postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_HOST: container-postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DATABASE: postgres
+    volumes:
+      - api-postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+volumes:
+  api-postgres-data:
