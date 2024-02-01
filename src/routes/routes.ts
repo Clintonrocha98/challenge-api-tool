@@ -7,8 +7,9 @@ import {
 } from "../middleware/Tools.Middleware";
 
 const routes = Router();
+
 routes.get("/", (req, res) => {
-  res.send("hello world");
+  res.status(200).json({ hello: "world" });
 });
 
 routes.post("/tools", toolsInsertMiddleware, (req: Request, res: Response) =>

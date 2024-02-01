@@ -1,6 +1,6 @@
-import { test, expect, describe, beforeAll, afterEach, vi } from "vitest";
+import { test, expect, describe, beforeAll, vi } from "vitest";
 import { ToolsService } from "./Tools.Service";
-import { InMemoryToolsRepository } from "../repository/Tools.Repository.InMemory";
+import { InMemoryToolsRepository } from "../test/Tools.Repository.InMemory";
 import { NotFoundTag, ToolNotExist } from "./error/Tools.Service.Error";
 
 let toolsRepository: InMemoryToolsRepository;

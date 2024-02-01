@@ -1,24 +1,19 @@
 import { Request, Response } from "express";
 import { ToolsService } from "../service/Tools.Service";
-import { validationResult } from "express-validator";
 
 export class ToolsController {
   constructor(private toolsService: ToolsService) {}
 
   async insert(req: Request, res: Response) {
     const { title, description, link, tags } = req.body;
-    const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    
     const tools = await this.toolsService.insert({
       title,
       description,
       link,
       tags,
     });
+
     res.status(201).json(tools);
   }
   async tools(req: Request, res: Response) {

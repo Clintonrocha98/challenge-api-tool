@@ -1,6 +1,6 @@
-import { Pool } from "pg";
+import { Client } from "pg";
 
-const pool = new Pool({
+const pool = new Client({
   host: process.env.POSTGRE_HOST,
   port: 5432,
   user: process.env.POSTGRE_USER,
@@ -18,9 +18,7 @@ const createTable = async () => {
         tags VARCHAR(255)[]
       )
     `;
-    
   await pool.query(createTableQuery);
-
   console.log("Tabela 'tools' criada com sucesso");
 };
 

@@ -1,6 +1,6 @@
 import { Tools } from "../domain/tools/Tools";
 import { toolsDTO } from "../domain/tools/Tools.DTO";
-import { IToolsRepository } from "./ITools.Repository";
+import { IToolsRepository } from "../repository/ITools.Repository";
 
 export class InMemoryToolsRepository implements IToolsRepository {
   private toolsArray: Tools[] = [];

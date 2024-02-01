@@ -4,6 +4,7 @@ import { toolsDTO } from "../domain/tools/Tools.DTO";
 import { IToolsRepository } from "./ITools.Repository";
 
 export class ToolsRepository implements IToolsRepository {
+  
   async insert({ title, description, link, tags }: toolsDTO): Promise<Tools> {
     const newTool = await pool.query<Tools>(
       "INSERT INTO tools (title, link, description, tags) VALUES ($1, $2, $3, $4) RETURNING *",
