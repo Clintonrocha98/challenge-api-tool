@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Ferramentas API",
+    "description": "API para gerenciar ferramentas"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/tools": {
+      "post": {
+        "summary": "Cadastrar uma ferramenta",
+        "tags": ["Tools"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tools"
+              },
+              "examples": {
+                "tool": {
+                  "value": {
+                    "title": "Discord",
+                    "link": "https://discord.com",
+                    "description": "App para conversar com a galera",
+                    "tags": ["bate-papo", "jogos"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": { "description": "Invalid fild" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Tools"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar todas as ferramentas cadastradas",
+        "tags": ["Tools"],
+        "responses": {
+          "200": {
+            "description": "Lista de ferramentas",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "title": "Notion",
+                    "link": "https://notion.so",
+                    "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized.",
+                    "tags": [
+                      "organization",
+                      "planning",
+                      "collaboration",
+                      "writing",
+                      "calendar"
+                    ]
+                  },
+                  {
+                    "id": 2,
+                    "title": "json-server",
+                    "link": "https://github.com/typicode/json-server",
+                    "description": "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.",
+                    "tags": ["api", "json", "schema", "node", "github", "rest"]
+                  },
+                  {
+                    "id": 3,
+                    "title": "fastify",
+                    "link": "https://www.fastify.io/",
+                    "description": "Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.",
+                    "tags": [
+                      "web",
+                      "framework",
+                      "node",
+                      "http2",
+                      "https",
+                      "localhost"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/{tag}": {
+      "get": {
+        "summary": "Busca ferramenta através da tag",
+        "tags": ["Tools"],
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "params",
+            "description": "Nome da tag de uma ferramenta",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": { "description": "Tag not found" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Tools"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/{id}": {
+      "delete": {
+        "summary": "Deleta uma ferramenta pelo id",
+        "tags": ["Tools"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "description": "id de uma ferramenta cadastrada",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": { "description": "Tool not exist" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Tools"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tools": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
